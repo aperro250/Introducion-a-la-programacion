@@ -6,6 +6,9 @@ Date: 18/9/26
 Version: 1.1.1
 '''
 
+import time
+import random
+
 # Logo del SO
 logo = """
   _       _            _     _             
@@ -17,7 +20,7 @@ logo = """
 
 # Variables de visualisacion
 welcome_message = "Bienvenido al Sistema!"
-line_mark = "======================================================="
+line_mark = "=" * 60
 
 # Variables de informacion del sistema
 version = "3.0.1"
@@ -31,39 +34,49 @@ Disk = True
 Ethernet = False
 Mouse_Optical = False
 
-
+#------------------Metodos--------------------------------------------
 # Metodo de checkeo de hardaware
 
 def is_hardware_ok (is_hardware_working):
+    time.sleep(random.uniform(0.1,1.5))
     if is_hardware_working == True:
-        return "OK"
+        return "\033[96m[OK]\033[0m"
     else:
-        return "ERROR"
+        return "\033[93m[ERROR]\033[0m"
 
+def printtimer (text):
+    text = str(text)
+    character_list = list(text)
+    list_length = len(character_list)
+    for x in range(list_length-1):
+        print(character_list[x], end="")
+        time.sleep(random.uniform(0.0,0.1))
+    print(character_list[list_length-1])
+#-----------------------------------------------------------------------------------------
 # Imprimido de informacion
 
 print (line_mark)
 
 print (logo)
-print ()
-print ("\tSistema Operativo: " + OS_name)
-print ("\tVersion: " + version)
+print ("\n")
+printtimer ("\tSistema Operativo: " + OS_name)
+printtimer ("\tVersion: " + version)
 
 print (line_mark)
 
 print ()
-print ("Comprobando hardware...")
+printtimer ("Comprobando hardware...")
 print ()
-print ("CPU: " f"[ {is_hardware_ok(CPU)} ]")
-print ("RAM: " f"[ {is_hardware_ok(RAM)} ]")
-print ("Disk: " f"[ {is_hardware_ok(Disk)} ]")
-print ("Ethernet: " f"[ {is_hardware_ok(Ethernet)} ]")
-print ("Optical mouse: " f"[ {is_hardware_ok(Mouse_Optical)} ]")
+printtimer ("CPU: " + is_hardware_ok(CPU))
+printtimer ("RAM: "  +is_hardware_ok(RAM))
+printtimer ("Disk: "  +is_hardware_ok(Disk))
+printtimer ("Ethernet: "  +is_hardware_ok(Ethernet))
+printtimer ("Optical mouse: "  +is_hardware_ok(Mouse_Optical))
 print ()
 
 print (line_mark)
 
-print (welcome_message)
+printtimer (welcome_message)
 
 print (line_mark)
 
