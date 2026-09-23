@@ -26,6 +26,7 @@ nesecitad de investigar:
 He tenido que  investigar los codigos de colores, el nobre de biblioteca para hacer un timer y biblioteca para randomizar (no era nesesario, pero he querido randomizar.).
 Aprendido:
 
+Si con el metodo list() convierto un String a lista, automaticamente me parte el texto a char cada simbolo.
 El metodo print() tiene paramentro end="" que permite customizar el final de la linea a imprimir. Por defecto es un salto de linea. Si se escribe un valor en blanco, no habra un salto de linea.
 Fuentes:
 
