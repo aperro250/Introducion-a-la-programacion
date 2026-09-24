@@ -14,6 +14,7 @@ Se crean 2 metodos:
         Recive un valor que despues para minimizar fallos es convertido a String.
         Crea un lista en la cual cada valor es un caracter de la String importada.
         Se entra en un ciclo for en el cual se imprime una letra a trabez de incrementando cada la x para poder seguir el orden de imprimo cada intracion la siguinente letra de la lista. Cada iteracion se para para un numero aleatorio entre 0-0.1 segundos
+        Se añade el parametro flush=True para que imprima sin esperar a rellenar un buffer.
         Se sale de bucle para imprimir la ultima letra y hacer un salto de linea
 
 Al llegar a la parte de imprimicion de texto, se utiliza:
@@ -26,6 +27,7 @@ nesecitad de investigar:
 He tenido que  investigar los codigos de colores, el nobre de biblioteca para hacer un timer y biblioteca para randomizar (no era nesesario, pero he querido randomizar.).
 Aprendido:
 
+flush=True es un parametro que recive print() para decir que no espera a que se rellene el bufer para imprimer para que escriba el texto enm la terminal
 Si con el metodo list() convierto un String a lista, automaticamente me parte el texto a char cada simbolo.
 El metodo print() tiene paramentro end="" que permite customizar el final de la linea a imprimir. Por defecto es un salto de linea. Si se escribe un valor en blanco, no habra un salto de linea.
 Fuentes:

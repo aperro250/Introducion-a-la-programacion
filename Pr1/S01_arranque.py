@@ -49,7 +49,7 @@ def printtimer (text):
     character_list = list(text)
     list_length = len(character_list)
     for x in range(list_length-1):
-        print(character_list[x], end="")
+        print(character_list[x], end="" , flush=True)
         time.sleep(random.uniform(0.0,0.1))
     print(character_list[list_length-1])
 #-----------------------------------------------------------------------------------------
