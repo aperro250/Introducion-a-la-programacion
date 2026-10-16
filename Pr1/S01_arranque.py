@@ -1,10 +1,10 @@
 ## Program information
-'''
+"""
 Author: Timoteo Brovenko
 Class: 2-SMR-B
 Date: 18/9/26
 Version: 1.1.1
-'''
+"""
 
 import time
 import random
@@ -39,7 +39,7 @@ Mouse_Optical = False
 
 def is_hardware_ok (is_hardware_working):
     time.sleep(random.uniform(0.1,1.5))
-    if is_hardware_working == True:
+    if is_hardware_working:
         return "\033[96m[OK]\033[0m"
     else:
         return "\033[93m[ERROR]\033[0m"

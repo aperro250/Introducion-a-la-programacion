@@ -1,10 +1,10 @@
 ## Program information
-'''
+"""
 Author: Timoteo Brovenko
 Class: 2-SMR-B
 Date: 30/9/26
 Version: 1.1.1
-'''
+"""
 
 def imprimir_nomre_ejercicio (numero):
     print ("\n"+"="*3 + f" Ejercicio {numero} " + "="*3 + "\n")
