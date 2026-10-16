@@ -68,6 +68,7 @@ wait()
 Year = 2026
 anyo_nacimiento = int(input("Dame el año de nacimiento: "))
 
+# La ñ no es un ASSCI simvolo, por lo que lo sustituyo por "ny"
 anyos_actuales = Year - anyo_nacimiento
 
 print (f"Este año cumple {anyos_actuales} años")
