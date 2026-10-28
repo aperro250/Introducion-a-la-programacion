@@ -1,0 +1,20 @@
+{
+  "alumnado": {
+    "tiempo_permitido": {
+      "start": 28800,
+      "end": 50400
+    }
+  },
+  "profesorado": {
+    "tiempo_permitido": {
+      "start": 28800,
+      "end": 72000
+    }
+  },
+  "tecnico": {
+    "tiempo_permitido": {
+      "start": 0,
+      "end": 86400
+    }
+  }
+}
