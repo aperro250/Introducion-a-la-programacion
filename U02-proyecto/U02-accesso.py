@@ -2,6 +2,8 @@
 APERTURA = 8
 CIERRE = 20
 LIMITE_ALUMNADO = 14
+APERTURA_VISITA = 10
+CIERRE_VISITA = 13
 ERROR_MESSAGE = "\033[91m[ERROR]\033[0m"
 logo = '''\033[92m
 ==============================================
@@ -34,17 +36,22 @@ def check_user():
 
 #============== COMPROVACIONES PERFIL ===================
 
-perfil = input("Perfil (alumnado/profesorado/tecnico): ")
-
+perfil = input("Perfil (alumnado/profesorado/tecnico/visita): ")
+if perfil == "visita":
+    acompanante = input("Introdusca nombre de la persona acompañante: ")
 def check_perfil():
 
     # comprovar que este elegido uno de tres posibles perfiles
-    perfiles = ["alumnado", "profesorado", "tecnico"]
+    perfiles = ["alumnado", "profesorado", "tecnico", "visita"]
     errores = 0
 
     if not perfil in perfiles:
         print(f"{ERROR_MESSAGE} El perfil debe ser uno de los tres posibles")
         errores += 1
+    if perfil == "visita":
+        if acompanante == "":
+            print(f"{ERROR_MESSAGE} Usted debe tener una persona acompañante")
+            errores += 1
     return errores
 # ================ COMPROVACION DE TIEMPO ===================
 
@@ -96,6 +103,9 @@ else:
 print (f"{"Usuario:":<15} {usuario:<15}")
 print (f"{"Perfil:":<15} {perfil:<15}")
 
+if perfil == "visita":
+    print (f"{"Acompañante:":<15} {acompanante:<15}")
+
 if horas != -1:
     if minutos != -1:
         print(f"{"Horas:":<15} {f"{horas}:{minutos}":<15}")
@@ -129,6 +139,14 @@ elif perfil == "profesorado":
         print(f'''
 \033[38;5;208m[DENEGADO]\033[0m Acceso denegado: fuera del horario de su perfil
 Horario del laboratorio: de {APERTURA}:00 a {CIERRE}:00
+''')
+elif perfil == "visita":
+    if APERTURA_VISITA <= horas <= CIERRE_VISITA:
+        print(acceso_corecto)
+    else:
+        print(f'''
+\033[38;5;208m[DENEGADO]\033[0m Acceso denegado: fuera del horario de su perfil
+Horario del visita: de {APERTURA_VISITA}:00 a {CIERRE_VISITA}:00
 ''')
 elif perfil == "tecnico":
     print(acceso_corecto)
