@@ -55,7 +55,7 @@ def isTime (givenTime):
 
         if horas > 23:
             return False
-        elif mins > 59:
+        elif 0 < mins > 59:
             return False
         elif segundos > 59:
             return False
