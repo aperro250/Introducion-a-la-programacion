@@ -105,7 +105,8 @@ else:
 
 
 
-# Comprobar si es posible entrar ha esta hora
+# =============== COMPROBAR HORA PERMITIDA =====================
+#======================= ACCESO ===============================0
 
 horas = int(horas)
 minutos = int(minutos)
