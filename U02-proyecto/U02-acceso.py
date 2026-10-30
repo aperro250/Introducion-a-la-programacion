@@ -1,15 +1,18 @@
-## Program information
-"""
-Author: Timoteo Brovenko
-Class: 2-SMR-B
-Date: 16/10/26
-Version: 1.1.1
-"""
+# ---------------------------------------------------------------
+# Misión: U02 - Control de acceso al laboratorio
+# Alumno/a: Tymofii Brovenko
+# Pareja: -
+# Fecha: 30/10/26
+# Nivel: Vía rápida / Nivel exigido / Nivel avanzado (borra los dos que no correspondan)
+# Uso de IA: para buscar metodos y resolver problemas y fallo0s de sintaxis
+# Referencias: codigo de importacion de json copiado y reescrito de mi anterior proyecto: https://github.com/aperro250/AlbionGDT-Stats
+# ---------------------------------------------------------------
 
 import json
-import time
+# Importar time solo si coge el tiempo automaticamente del sistema
+# import time
 
-logo = '''
+logo = '''\033[92m
 ▄▄▄▄▄▄▄▄▄            ▄▄▄▄▄▄▄▄▄▄▄▄    ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄   
 ▄       ▓     ░    ▄▀            ▀▄  ▄              ▀▄ 
 █       ▒   ·░░░  ▐▌              ▐▌ █               ▐▌
@@ -21,7 +24,7 @@ logo = '''
 █┼┼┼ ┼┼┼┼┼┼┼┼┼┼┼░ █┼┼┼┼┼┼░  █┼┼┼ ┼┼░ █┼┼┼┼┼┼▒   ▓┼┼ ┼┼░
 ▐▌┼┼┼┼┼┼┼┼┼┼┼┼┼┼▒ █┼┼┼┼┼┼▒  █┼┼┼┼┼┼▒ █┼┼┼┼┼┼░▄▄▄▀┼┼┼┼▐▌
 ·▀▄┼┼┼┼┼┼┼┼┼┼┼┼┼▓ █┼┼┼┼┼┼▓  █┼┼┼┼┼┼▓ █┼┼┼┼┼┼┼┼┼┼┼┼┼┼▄▀ 
-   ▀▀▀▀▀▀▀▀▀▀▀▀▀▀ ▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀ ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀   
+   ▀▀▀▀▀▀▀▀▀▀▀▀▀▀ ▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀ ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀   \033[0m
 '''
 
 # ------------------- Methods ------------------
@@ -40,11 +43,27 @@ def time_to_seconds(givenTime):
 def seconds_to_time(givenTime):
     horas = givenTime // 3600
     mins = (givenTime % 3600) // 60
-    segundos = givenTime % 60
-    segundos = givenTime - (mins * 60)
+    segundos = (givenTime % 3600) % 60
 
     return f"{horas}:{mins}:{segundos}"
 
+def isTime (givenTime):
+    try:
+        horas = int(givenTime[:2])
+        mins = int(givenTime[3:5])
+        segundos = (int(givenTime[6:8]))
+
+        if horas > 23:
+            return False
+        elif mins > 59:
+            return False
+        elif segundos > 59:
+            return False
+
+    except ValueError:
+        return False
+
+    return True
 def clear():
     print("\033[H\033[J", end="")
 
@@ -98,31 +117,48 @@ def get_available_end_time(user):
     return perfiles[perfil]["tiempo_permitido"]["end"]
 # ---------------- Start program ---------------------
 
-print(seconds_to_time(2234))
 print(logo)
 print("\t")
-print("Bienvenido al sistema")
+print("\033[91mBienvenido al sistema\033[0m")
 print("\t")
 while True:
-    print('''
+    print('''\033[94m
     Elija lo que quiere hacer:
     
     (1) Validar la entrada del usuario
     (2) Cambiar o introducir registros de entrada
     (3) Consultar registros de entrada
-    
+    (4) Salir \t \033[0m
     ''')
 
-    opcion = input("Opcion: ")
+    opcion = input("\033[93mOpcion: \033[0m")
 
     if opcion == "1":
 
         clear()
-        user = input("Usuario: ")
+
+        while True:
+
+            user = input("Usuario: ").lower()
+
+            if len(user) < 3:
+                print("Error, el usuario no puede ser menor de 3 caractres, intentalo de nuevo")
+            else:
+                break
+
         password = input("Contraseña: ")
 
+        # Coger el tiempo del sistema de ahora
         #time_now = time.strftime("%H:%M:%S", time.localtime())
-        time_now = "20:00:00"
+
+        while True:
+            time_now = input("Introdusca elo tiempo: ")
+
+            if isTime(time_now):
+                break
+            else:
+                print("Timepo eroneo, introdusca un valor valido en formato HH:MM:SS y intentalo de nuevo")
+
 
         #print(time_to_seconds(time_now))
         if check_password(user, password):
@@ -131,8 +167,14 @@ while True:
             else:
                 print(f"Entrada restringida. Usted solo puede entrar desde {seconds_to_time(get_available_start_time(user))} hasta {seconds_to_time(get_available_end_time(user))}")
         else:
-            print("Error, intentalo de nuevo")
+            print("Error de verificacion, intentalo de nuevo")
 
+    elif opcion == "2":
+        print("Esta funcion esta en trabajo")
+    elif opcion == "3":
+        print("Esta funcion esta en trabajo")
+    elif opcion == "4":
+        exit()
 
 
 #print(time.strftime("%d/%m/%Y %H:%M:%S", time.localtime()))
