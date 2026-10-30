@@ -8,11 +8,9 @@ logo = '''\033[92m
 CONTROL DE ACCESO AL LABORATORIO
 ==============================================\033[0m'''
 
-# TODO: pedir el perfil y la hora igual que el usuario
-hora = -1
-errores = 0
+# pedir el perfil y la hora igual que el usuario
 
-# TODO: Inicio programa
+# Inicio programa
 
 print (logo + "\n")
 #============ COMPROVACIONES USUARIO ===================
@@ -22,12 +20,12 @@ usuario = input("Usuario: ").strip().lower()
 def check_user():
 
     errores = 0
-    # TODO: validar que usuario no es viacio
+    # validar que usuario no es viacio
     if usuario == "":
         print(f"{ERROR_MESSAGE} El usuario no puede estar vacío")
         errores += 1
 
-    # TODO: validar la longitud del usuario, el perfil y la hora
+    # validar la longitud del usuario, el perfil y la hora
     if len(usuario) < 3:
         print(f"{ERROR_MESSAGE} El usuario debe tener 3 o mas simbolos")
         errores += 1
@@ -40,7 +38,7 @@ perfil = input("Perfil (alumnado/profesorado/tecnico): ")
 
 def check_perfil():
 
-    # TODO: comprovar que este elegido uno de tres posibles perfiles
+    # comprovar que este elegido uno de tres posibles perfiles
     perfiles = ["alumnado", "profesorado", "tecnico"]
     errores = 0
 
@@ -90,7 +88,7 @@ if errores > 0:
     print(f"\033[38;5;208m[DENEGADO]\033[0m {errores} dato(s) incorrecto(s)")
     exit()
 else:
-    pass # TODO: decidir el acceso y mostrar la ficha
+    pass # decidir el acceso y mostrar la ficha
 
 
 # ============== PONER INFORMACION ============
