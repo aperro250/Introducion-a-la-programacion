@@ -19,7 +19,7 @@ logo = '''\033[92m
 ==============================================
 CONTROL DE ACCESO AL LABORATORIO
 ==============================================\033[0m'''
-
+acompanante = ""
 # pedir el perfil y la hora igual que el usuario
 
 # Inicio programa
