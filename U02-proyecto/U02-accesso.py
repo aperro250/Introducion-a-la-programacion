@@ -1,9 +1,19 @@
+
+
+
 # Variables
 APERTURA = 8
 CIERRE = 20
 LIMITE_ALUMNADO = 14
 APERTURA_VISITA = 10
 CIERRE_VISITA = 13
+
+APERTURA_MINUTOS = 8 * 60
+CIERRE_MINUTOS = 20 * 60
+LIMITE_ALUMNADO_MINUTOS = 14 * 60
+APERTURA_VISITA_MINUTOS = 10 * 60
+CIERRE_VISITA_MINUTOS = 13 * 60
+
 ERROR_MESSAGE = "\033[91m[ERROR]\033[0m"
 logo = '''\033[92m
 ==============================================
@@ -28,15 +38,15 @@ def check_user():
         errores += 1
 
     # validar la longitud del usuario, el perfil y la hora
-    if len(usuario) < 3:
+    elif len(usuario) < 3:
         print(f"{ERROR_MESSAGE} El usuario debe tener 3 o mas simbolos")
         errores += 1
 
     return errores
 
 #============== COMPROVACIONES PERFIL ===================
-
-perfil = input("Perfil (alumnado/profesorado/tecnico/visita): ")
+acompanante =""
+perfil = input("Perfil (alumnado/profesorado/tecnico/visita): ").strip().lower()
 if perfil == "visita":
     acompanante = input("Introdusca nombre de la persona acompañante: ")
 def check_perfil():
@@ -54,10 +64,19 @@ def check_perfil():
             errores += 1
     return errores
 # ================ COMPROVACION DE TIEMPO ===================
+centinela = -1
+while True:
+    tiempo = input("Hora (HH:MM): ")
 
-tiempo = input("Hora (HH:MM): ")
-hora = tiempo.split(":")[0]
-minut = tiempo.split(":")[1]
+    try:
+        hora = tiempo.split(":")[0]
+        minut = tiempo.split(":")[1]
+        centinela = 0
+    except:
+        print("Hora incorecta, por vafor indicala en formato HH:MM")
+    if centinela != -1:
+        break
+
 horas = -1
 minutos = -1
 
@@ -120,11 +139,13 @@ else:
 
 horas = int(horas)
 minutos = int(minutos)
+# Convertir el tiempo a minutos para facilidad en comprovacion
+time = horas * 60 + minutos
 
 acceso_corecto = "\t\033[38;5;46mAcceso corecto\033[0m"
 
 if perfil == "alumnado":
-    if APERTURA <= horas <= LIMITE_ALUMNADO:
+    if APERTURA_MINUTOS <= time <= LIMITE_ALUMNADO_MINUTOS:
         print(acceso_corecto)
     else:
         print(f'''
@@ -133,7 +154,7 @@ Horario del laboratorio: de {APERTURA}:00 a {CIERRE}:00
 El alumnado entra hasta las {LIMITE_ALUMNADO}:00
 ''')
 elif perfil == "profesorado":
-    if APERTURA <= horas <= CIERRE:
+    if APERTURA_MINUTOS <= time <= CIERRE_MINUTOS:
         print(acceso_corecto)
     else:
         print(f'''
@@ -141,7 +162,7 @@ elif perfil == "profesorado":
 Horario del laboratorio: de {APERTURA}:00 a {CIERRE}:00
 ''')
 elif perfil == "visita":
-    if APERTURA_VISITA <= horas <= CIERRE_VISITA:
+    if APERTURA_VISITA_MINUTOS <= time <= CIERRE_VISITA_MINUTOS:
         print(acceso_corecto)
     else:
         print(f'''
