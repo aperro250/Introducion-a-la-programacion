@@ -1,5 +1,11 @@
-
-
+# ---------------------------------------------------------------
+# Misión: U02 - Control de acceso al laboratorio
+# Alumno/a: Tymofii Brovenko
+# Pareja: -
+# Fecha: 30/10/26
+# Nivel: Nivel avanzado
+# Uso de IA: para buscar metodos y resolver problemas y fallo0s de sintaxis
+# ---------------------------------------------------------------
 
 # Variables
 APERTURA = 8
@@ -8,11 +14,11 @@ LIMITE_ALUMNADO = 14
 APERTURA_VISITA = 10
 CIERRE_VISITA = 13
 
-APERTURA_MINUTOS = 8 * 60
-CIERRE_MINUTOS = 20 * 60
-LIMITE_ALUMNADO_MINUTOS = 14 * 60
-APERTURA_VISITA_MINUTOS = 10 * 60
-CIERRE_VISITA_MINUTOS = 13 * 60
+APERTURA_MINUTOS = APERTURA * 60
+CIERRE_MINUTOS = CIERRE * 60
+LIMITE_ALUMNADO_MINUTOS = LIMITE_ALUMNADO * 60
+APERTURA_VISITA_MINUTOS = APERTURA_VISITA * 60
+CIERRE_VISITA_MINUTOS = CIERRE_VISITA * 60
 
 ERROR_MESSAGE = "\033[91m[ERROR]\033[0m"
 logo = '''\033[92m
@@ -81,7 +87,7 @@ horas = -1
 minutos = -1
 
 def check_time():
-    global horas, minut, horas, minutos
+    global horas, minut, hora, minutos
     errores = 0
 # Comprovacion para horas
     if hora.isdigit():
