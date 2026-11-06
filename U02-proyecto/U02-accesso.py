@@ -4,7 +4,7 @@
 # Pareja: -
 # Fecha: 30/10/26
 # Nivel: Nivel avanzado
-# Uso de IA: para buscar metodos y resolver problemas y fallo0s de sintaxis
+# Uso de IA: para buscar metodos y resolver problemas y fallos de sintaxis. Puede visualizar las preguntas en https://chatgpt.com/share/6aed959c-d998-83eb-a646-ef3a3f3bfb2c
 # ---------------------------------------------------------------
 
 # Variables
@@ -54,7 +54,7 @@ def check_user():
 acompanante =""
 perfil = input("Perfil (alumnado/profesorado/tecnico/visita): ").strip().lower()
 if perfil == "visita":
-    acompanante = input("Introdusca nombre de la persona acompañante: ")
+    acompanante = input("Introdusca nombre de la persona acompañante: ").strip().lower()
 def check_perfil():
 
     # comprovar que este elegido uno de tres posibles perfiles
@@ -64,7 +64,7 @@ def check_perfil():
     if not perfil in perfiles:
         print(f"{ERROR_MESSAGE} El perfil debe ser uno de los tres posibles")
         errores += 1
-    if perfil == "visita":
+    elif perfil == "visita":
         if acompanante == "":
             print(f"{ERROR_MESSAGE} Usted debe tener una persona acompañante")
             errores += 1
@@ -105,7 +105,7 @@ def check_time():
         if 0 <= int(minut) <= 59:
             minutos = minut
         else:
-            print(f"{ERROR_MESSAGE} los minutos deben ser entre 0 y 60 minutos")
+            print(f"{ERROR_MESSAGE} los minutos deben ser entre 0 y 59 minutos")
             errores += 1
     else:
         print(f"{ERROR_MESSAGE} los minutos deben ser un numero")
