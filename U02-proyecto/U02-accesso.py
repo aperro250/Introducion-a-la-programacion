@@ -33,7 +33,7 @@ acompanante = ""
 print (logo + "\n")
 #============ COMPROBACIONES USUARIO ===================
 
-usuario = input("Usuario: ").strip().lower()
+usuario = input("\033[33mUsuario: \033[0m").strip().lower()
 
 def check_user():
 
@@ -51,9 +51,9 @@ def check_user():
     return errores
 
 #============== COMPROBACIONES PERFIL ===================
-perfil = input("Perfil (alumnado/profesorado/tecnico/visita): ").strip().lower()
+perfil = input("\033[33mPerfil \033[91m(alumnado/profesorado/tecnico/visita)\033[33m: \033[0m").strip().lower()
 if perfil == "visita":
-    acompanante = input("Introduzca nombre de la persona acompañante: ").strip().lower()
+    acompanante = input("\033[33mIntroduzca nombre de la persona acompañante: \033[om").strip().lower()
 def check_perfil():
 
     # comprobar que este elegido uno de tres posibles perfiles
@@ -71,7 +71,7 @@ def check_perfil():
 # ================ COMPROBACIÓN DE TIEMPO ===================
 centinela = -1
 while True:
-    tiempo = input("Hora (HH:MM): ")
+    tiempo = input("\033[33mHora \033[91m(HH:MM)\033[33m: \033[0m")
 
     try:
         hora = tiempo.split(":")[0]
@@ -124,17 +124,17 @@ else:
 
 # ============== PONER INFORMACIÓN ============
 
-print (f"{"Usuario:":<15} {usuario:<15}")
-print (f"{"Perfil:":<15} {perfil:<15}")
+print (f"\033[34m{"Usuario:":<15} {usuario:<15}\033[0m")
+print (f"\033[34m{"Perfil:":<15} {perfil:<15}\033[0m")
 
 if perfil == "visita":
-    print (f"{"Acompañante:":<15} {acompanante:<15}")
+    print (f"\033[34m{"Acompañante:":<15} {acompanante:<15}\033[0m")
 
 if horas != -1:
     if minutos != -1:
-        print(f"{"Horas:":<15} {f"{horas}:{minutos}":<15}")
+        print(f"\033[34m{"Horas:":<15} {f"{horas}:{minutos}":<15}\033[0m")
 else:
-    print("Error interno de centinela")
+    print("38;5;208m[DENEGADO] Error interno de centinela \033[0m")
     exit()
 
 
@@ -148,31 +148,32 @@ minutos = int(minutos)
 time = horas * 60 + minutos
 
 acceso_correcto = "\t\033[38;5;46mAcceso correcto\033[0m"
+acceso_denegado = "\033[38;5;208m[DENEGADO]\033[0m"
 
 if perfil == "alumnado":
     if APERTURA_MINUTOS <= time <= LIMITE_ALUMNADO_MINUTOS:
         print(acceso_correcto)
     else:
         print(f'''
-\033[38;5;208m[DENEGADO]\033[0m Acceso denegado: fuera del horario de su perfil
-Horario del laboratorio: de {APERTURA}:00 a {CIERRE}:00
-El alumnado entra hasta las {LIMITE_ALUMNADO}:00
+{acceso_denegado} Acceso denegado: fuera del horario de su perfil
+Horario del laboratorio: de \033[92m{APERTURA}:00\033[0m a \033[92m{CIERRE}:00\033[0m
+El alumnado entra hasta las \033[92m{LIMITE_ALUMNADO}:00\033[0m
 ''')
 elif perfil == "profesorado":
     if APERTURA_MINUTOS <= time <= CIERRE_MINUTOS:
         print(acceso_correcto)
     else:
         print(f'''
-\033[38;5;208m[DENEGADO]\033[0m Acceso denegado: fuera del horario de su perfil
-Horario del laboratorio: de {APERTURA}:00 a {CIERRE}:00
+{acceso_denegado} Acceso denegado: fuera del horario de su perfil
+Horario del laboratorio: de \033[92m{APERTURA}:00\033[0m a \033[92m{CIERRE}:00\033[0m
 ''')
 elif perfil == "visita":
     if APERTURA_VISITA_MINUTOS <= time <= CIERRE_VISITA_MINUTOS:
         print(acceso_correcto)
     else:
         print(f'''
-\033[38;5;208m[DENEGADO]\033[0m Acceso denegado: fuera del horario de su perfil
-Horario del visita: de {APERTURA_VISITA}:00 a {CIERRE_VISITA}:00
+{acceso_denegado} Acceso denegado: fuera del horario de su perfil
+Horario del visita: de \033[92m{APERTURA_VISITA}:00 a \033[92m{CIERRE_VISITA}:00\033[0m
 ''')
 elif perfil == "técnico":
     print(acceso_correcto)
