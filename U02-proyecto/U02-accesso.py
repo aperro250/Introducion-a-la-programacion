@@ -31,45 +31,44 @@ acompanante = ""
 # Inicio programa
 
 print (logo + "\n")
-#============ COMPROVACIONES USUARIO ===================
+#============ COMPROBACIONES USUARIO ===================
 
 usuario = input("Usuario: ").strip().lower()
 
 def check_user():
 
     errores = 0
-    # validar que usuario no es viacio
+    # validar que usuario no es vicio
     if usuario == "":
         print(f"{ERROR_MESSAGE} El usuario no puede estar vacío")
         errores += 1
 
     # validar la longitud del usuario, el perfil y la hora
     elif len(usuario) < 3:
-        print(f"{ERROR_MESSAGE} El usuario debe tener 3 o mas simbolos")
+        print(f"{ERROR_MESSAGE} El usuario debe tener 3 o mas símbolos")
         errores += 1
 
     return errores
 
-#============== COMPROVACIONES PERFIL ===================
-acompanante =""
+#============== COMPROBACIONES PERFIL ===================
 perfil = input("Perfil (alumnado/profesorado/tecnico/visita): ").strip().lower()
 if perfil == "visita":
-    acompanante = input("Introdusca nombre de la persona acompañante: ").strip().lower()
+    acompanante = input("Introduzca nombre de la persona acompañante: ").strip().lower()
 def check_perfil():
 
-    # comprovar que este elegido uno de tres posibles perfiles
-    perfiles = ["alumnado", "profesorado", "tecnico", "visita"]
+    # comprobar que este elegido uno de tres posibles perfiles
+    perfiles = ["alumnado", "profesorado", "técnico", "visita"]
     errores = 0
 
     if not perfil in perfiles:
-        print(f"{ERROR_MESSAGE} El perfil debe ser uno de los tres posibles")
+        print(f"{ERROR_MESSAGE} El perfil debe ser uno de los posibles")
         errores += 1
     elif perfil == "visita":
         if acompanante == "":
             print(f"{ERROR_MESSAGE} Usted debe tener una persona acompañante")
             errores += 1
     return errores
-# ================ COMPROVACION DE TIEMPO ===================
+# ================ COMPROBACIÓN DE TIEMPO ===================
 centinela = -1
 while True:
     tiempo = input("Hora (HH:MM): ")
@@ -79,7 +78,7 @@ while True:
         minut = tiempo.split(":")[1]
         centinela = 0
     except:
-        print("Hora incorecta, por vafor indicala en formato HH:MM")
+        print("Hora incorrecta, por favor indicala en formato HH:MM")
     if centinela != -1:
         break
 
@@ -87,9 +86,9 @@ horas = -1
 minutos = -1
 
 def check_time():
-    global horas, minut, hora, minutos
+    global horas, minutos
     errores = 0
-# Comprovacion para horas
+# Comprobación para horas
     if hora.isdigit():
         if 0 <= int(hora) <= 23:
             horas = hora
@@ -100,7 +99,7 @@ def check_time():
         print(f"{ERROR_MESSAGE} la hora debe ser un numero")
         errores += 1
 
-# Comprovaciones para minutos
+# Comprobaciones para minutos
     if minut.isdigit():
         if 0 <= int(minut) <= 59:
             minutos = minut
@@ -123,7 +122,7 @@ else:
     pass # decidir el acceso y mostrar la ficha
 
 
-# ============== PONER INFORMACION ============
+# ============== PONER INFORMACIÓN ============
 
 print (f"{"Usuario:":<15} {usuario:<15}")
 print (f"{"Perfil:":<15} {perfil:<15}")
@@ -145,14 +144,14 @@ else:
 
 horas = int(horas)
 minutos = int(minutos)
-# Convertir el tiempo a minutos para facilidad en comprovacion
+# Convertir el tiempo a minutos para facilidad en comprobación
 time = horas * 60 + minutos
 
-acceso_corecto = "\t\033[38;5;46mAcceso corecto\033[0m"
+acceso_correcto = "\t\033[38;5;46mAcceso correcto\033[0m"
 
 if perfil == "alumnado":
     if APERTURA_MINUTOS <= time <= LIMITE_ALUMNADO_MINUTOS:
-        print(acceso_corecto)
+        print(acceso_correcto)
     else:
         print(f'''
 \033[38;5;208m[DENEGADO]\033[0m Acceso denegado: fuera del horario de su perfil
@@ -161,7 +160,7 @@ El alumnado entra hasta las {LIMITE_ALUMNADO}:00
 ''')
 elif perfil == "profesorado":
     if APERTURA_MINUTOS <= time <= CIERRE_MINUTOS:
-        print(acceso_corecto)
+        print(acceso_correcto)
     else:
         print(f'''
 \033[38;5;208m[DENEGADO]\033[0m Acceso denegado: fuera del horario de su perfil
@@ -169,14 +168,14 @@ Horario del laboratorio: de {APERTURA}:00 a {CIERRE}:00
 ''')
 elif perfil == "visita":
     if APERTURA_VISITA_MINUTOS <= time <= CIERRE_VISITA_MINUTOS:
-        print(acceso_corecto)
+        print(acceso_correcto)
     else:
         print(f'''
 \033[38;5;208m[DENEGADO]\033[0m Acceso denegado: fuera del horario de su perfil
 Horario del visita: de {APERTURA_VISITA}:00 a {CIERRE_VISITA}:00
 ''')
-elif perfil == "tecnico":
-    print(acceso_corecto)
+elif perfil == "técnico":
+    print(acceso_correcto)
 else:
     print("Error interno de perfil")
 
