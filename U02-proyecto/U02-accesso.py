@@ -188,7 +188,6 @@ elif perfil == "tecnico":
 else:
     print("Error interno de perfil")
 
-### MAIN
 
 
 
